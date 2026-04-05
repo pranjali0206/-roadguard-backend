@@ -1,5 +1,7 @@
 package com.roadguard.backend.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,5 +25,13 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody User user) {
         String result = authService.registerUser(user);
         return ResponseEntity.ok(result);
+    }
+    @PostMapping("/verify-otp")
+    public ResponseEntity<String> verifyOtp(@RequestBody Map<String, String> request) {
+    String result = authService.verifyOtp(
+        request.get("email"),
+        request.get("otp")
+    );
+    return ResponseEntity.ok(result);
     }
 }
