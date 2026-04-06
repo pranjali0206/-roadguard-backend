@@ -51,4 +51,9 @@ public class AuthController {
     public ResponseEntity<String> test() {
     return ResponseEntity.ok("You are authenticated!");
     }
+
+    @GetMapping("/protected")
+    public ResponseEntity<String> protectedRoute() {
+    return ResponseEntity.ok("You accessed a protected route!");
+    }
 }
