@@ -25,7 +25,14 @@ public class SecurityConfig {
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+
+                // ── Auth (always public) ──────────────────────────────
                 .requestMatchers("/api/auth/**").permitAll()
+
+                // ── Workshops (all public — testing phase) ────────────
+                .requestMatchers("/api/workshops/**").permitAll()
+
+                // ── Everything else needs JWT ─────────────────────────
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthFilter,
